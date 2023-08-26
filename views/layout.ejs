@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8" />
+  <title><%- title %> | Ok - Dashboard Layout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="Dashboard Layout" name="description">
+  <meta content="UXLOGIC" name="author">
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="public/assets/images/favicon.ico">
+
+  <base href="/">
+
+  <%- HeaderCss %>
+  
+  <%- include ('./Partials/HeaderStyle') %>
+
+</head>
+
+<body>
+  <% 
+  console.log("layout: ", role); 
+%>
+  <!-- Begin page -->
+  <div id="layout-wrapper">
+
+    <%- include ('./Partials/Header') %>
+
+    <!-- Include the appropriate sidebar based on the user's role -->
+    <% if (role === 'user') { %>
+      <%- include('./Partials/Sidebar_User') %>
+    <% } else if (role === 'clan') { %>
+      <%- include('./Partials/Sidebar_Clan') %>
+    <% } %>
+
+    <div class="main-content">
+      <div class="page-content">
+        <div class="container-fluid">
+          <%- breadcrumb %>
+          
+          <%- body %>
+        </div>
+      </div>
+      <%- include ('./Partials/Footer') %>
+    </div>
+  </div>
+
+  <%- include ('./Partials/Rightbar')  %>
+  <%- include ('./Partials/VendorScript')  %>
+
+  <%- FooterJs %>
+
+  <script src="public/assets/js/app.js"></script>
+
+  <%- BottomJs %>
+</body>
+
+</html>

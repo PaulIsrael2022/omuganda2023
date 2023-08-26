@@ -1,0 +1,245 @@
+<%- contentFor('HeaderCss') %>
+
+<%- contentFor('breadcrumb') %>
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+      <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+        <h4 class="mb-sm-0 font-size-18">Create Clan Member Form</h4>
+        <div class="page-title-right">
+          <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item"><a href="javascript: void(0);">Manage Clan</a></li>
+            <li class="breadcrumb-item active">Create Clan Member Form</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end page title -->
+
+  <form>
+
+    <div class="form-group">
+      <label>Clan Head Name</label>
+      <input type="text" class="form-control" name="clanHeadName">
+    </div>
+  
+    <div class="form-group">
+      <label>Clan Head Image</label>
+      <input type="file" class="form-control-file" name="clanHeadImage">
+    </div>
+  
+    <div class="form-group">
+      <label>Child Name</label>
+      <input type="text" class="form-control" name="childName">
+    </div>
+  
+    <div class="form-group">
+      <label>Child Image</label>
+      <input type="file" class="form-control-file" name="childImage">
+    </div>
+  
+    <div class="form-group">
+      <label>Grand Child Name</label>
+      <input type="text" class="form-control" name="grandChildName">
+    </div>
+  
+    <div class="form-group">
+      <label>Grand Child Image</label>
+      <input type="file" class="form-control-file" name="grandChildImage">
+    </div>
+  
+    <div class="form-group">
+      <label>Great Grand Child Name</label>
+      <input type="text" class="form-control" name="greatGrandChildName">
+    </div>
+  
+    <div class="form-group">
+      <label>Great Grand Child Image</label>
+      <input type="file" class="form-control-file" name="greatGrandChildImage">
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Submit</button>
+  
+  </form>
+<%- contentFor('FooterJs') %>
+
+<%- contentFor('BottomJs') %>
+
+
+<script>
+    // We use jQuery to manipulate the DOM elements
+    $(document).ready(function() {
+      // Step 4: Store the data in a tree-like data structure
+      // We use an object to represent each node in the tree
+      // Each node has properties for name, role, and children
+      // Each node also has methods for adding and removing children
+      function Node(name, role) {
+        this.name = name;
+        this.role = role;
+        this.children = [];
+      }
+  
+      Node.prototype.addChild = function(child) {
+        this.children.push(child);
+      };
+  
+      Node.prototype.removeChild = function(child) {
+        var index = this.children.indexOf(child);
+        if (index > -1) {
+          this.children.splice(index, 1);
+        }
+      };
+  
+      // We use a variable to store the root of the tree
+      // The root is initially null until the user submits the form
+      var root = null;
+  
+      // Step 5: To add new members to the tree, allow the user to select an existing member and specify their relationship to the new member
+      // We use a function to find a node in the tree by name
+      // The function uses a recursive depth-first search algorithm
+      function findNodeByName(name, node) {
+        if (node == null) {
+          return null;
+        }
+        if (node.name == name) {
+          return node;
+        }
+        for (var i = 0; i < node.children.length; i++) {
+          var result = findNodeByName(name, node.children[i]);
+          if (result != null) {
+            return result;
+          }
+        }
+        return null;
+      }
+  
+      // We use a function to add a new member to the tree
+      // The function takes the name, role, and relationship of the new member as parameters
+      // The function finds the existing member that is related to the new member and adds the new member as a child or a parent accordingly
+      function addMemberToTree(name, role, relationship) {
+        var existingMemberName = $("#name").val();
+        var existingMemberNode = findNodeByName(existingMemberName, root);
+        if (existingMemberNode == null) {
+          alert("The existing member does not exist in the tree.");
+          return;
+        }
+        var newMemberNode = new Node(name, role);
+        if (relationship == "parent") {
+          newMemberNode.addChild(existingMemberNode);
+          root = newMemberNode;
+        } else if (relationship == "child") {
+          existingMemberNode.addChild(newMemberNode);
+        } else if (relationship == "sibling") {
+          var parent = findParent(existingMemberNode);
+          if (parent == null) {
+            alert("The existing member does not have a parent in the tree.");
+            return;
+          }
+          parent.addChild(newMemberNode);
+        } else if (relationship == "spouse") {
+          existingMemberNode.addChild(newMemberNode);
+          newMemberNode.addChild(existingMemberNode);
+        } else if (relationship == "other") {
+          alert("The relationship is not supported.");
+          return;
+        }
+      }
+  
+      // We use a function to find the parent of a node in the tree
+      // The function uses a recursive depth-first search algorithm
+      function findParent(node, parent = null) {
+        if (node == null || root == null) {
+          return null;
+        }
+        if (node == root) {
+          return parent;
+        }
+        for (var i = 0; i < root.children.length; i++) {
+          var result = findParent(node, root.children[i]);
+          if (result != null) {
+            return result;
+          }
+        }
+        return null;
+      }
+  
+      // Step 6: To display the lineage of the clan, traverse the tree in depth-first order and display the names and roles of each member
+      // We use a function to display the lineage of the clan
+      // The function takes the root of the tree as a parameter
+      // The function uses a recursive depth-first traversal algorithm
+      // The function displays each node's name and role in a list element
+      function displayLineage(node) {
+        if (node == null) {
+          return;
+        }
+        $("#lineage-list").append("<li>" + node.name + " (" + node.role + ")</li>");
+        for (var i = 0; i < node.children.length; i++) {
+          displayLineage(node.children[i]);
+        }
+      }
+  
+      // We use a click event handler for the add row button
+      // The handler clones the template row, shows it, and appends it to the table body
+      $("#add-row").click(function() {
+        var newRow = $("#template-row").clone();
+        newRow.removeAttr("id");
+        newRow.show();
+        $("#relationship-table tbody").append(newRow);
+      });
+  
+      // We use a click event handler for the delete row buttons
+      // The handler removes the row from the table body
+      $(document).on("click", ".delete-row", function() {
+        $(this).closest("tr").remove();
+      });
+  
+      // We use a submit event handler for the form
+      // The handler prevents the default form submission and validates the relationships
+      // If the relationships are valid, the handler adds the new member to the tree and displays the lineage
+      $("#clan-form").submit(function(event) {
+        event.preventDefault();
+        var name = $("#name").val();
+        var role = $("#role").val();
+        var relationships = [];
+        $("#relationship-table tbody tr:visible").each(function() {
+          var relationship = $(this).find("select[name='relationship[]']").val();
+          var relatedName = $(this).find("input[name='related-name[]']").val();
+          relationships.push({ relationship: relationship, relatedName: relatedName });
+        });
+        if (validateRelationships(relationships)) {
+          if (root == null) {
+            root = new Node(name, role);
+          } else {
+            relationships.forEach(function(relationship) {
+              addMemberToTree(name, role, relationship.relationship);
+            });
+          }
+          $("#lineage-list").empty();
+          displayLineage(root);
+        }
+      });
+  
+      // We use a function to validate the relationships
+      // The function checks that all relationships have a valid value and that there are no duplicate relationships
+      function validateRelationships(relationships) {
+        var valid = true;
+        var relationshipValues = [];
+        relationships.forEach(function(relationship) {
+          if (relationship.relationship == "" || relationship.relatedName == "") {
+            alert("Please fill in all relationship fields.");
+            valid = false;
+            return false;
+          }
+          if (relationshipValues.indexOf(relationship.relationship) > -1) {
+            alert("Please remove duplicate relationships.");
+            valid = false;
+            return false;
+          }
+          relationshipValues.push(relationship.relationship);
+        });
+        return valid;
+      }
+    });
+  </script>
