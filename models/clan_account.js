@@ -22,3 +22,13 @@ module.exports = ClanMember;
 // notable memebers
 
 // traditions
+
+// Oral Histories
+
+// Media Gallery
+
+// Members List
+
+// Profile
+
+// Settings and Billing
