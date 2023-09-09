@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./user');
 const Schema = mongoose.Schema;
 
 // Define Clan Head Fmily Tree schema
@@ -145,7 +146,7 @@ const ClanProfile = mongoose.model('Clan', clanProfileSchema);
 
 module.exports = {
   ClanMember: mongoose.model('ClanMember', clanMemberSchema),
-  FamilyTree: mongoose.model('FamilyTree', familyTreeSchema),
+  FamilyTree: mongoose.model('FamilyTree', PersonSchema),
   ClanHistory: mongoose.model('ClanHistory', clanHistorySchema),
   NoteworthyClanMember: mongoose.model('NoteworthyClanMember', noteworthyMemberSchema),
   Tradition: mongoose.model('Tradition', traditionSchema),
