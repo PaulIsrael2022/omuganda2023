@@ -1,287 +1,289 @@
-<%- contentFor('HeaderCss') %>
-  <!-- Add PristineJS CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/pristinejs@1.0.0/dist/pristine.min.css" rel="stylesheet" type="text/css">
+ <%- contentFor('HeaderCss') %>
 
-  <%- contentFor('breadcrumb') %>
+    <%- contentFor('breadcrumb') %>
 
-    <!-- Breadcrumb -->
-    <div class="row">
-      <div class="col-12">
-        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-          <h4 class="mb-sm-0 font-size-18">Clan Details</h4>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center
+                    justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Record Clan Info</h4>
 
-          <div class="page-title-right">
-            <ol class="breadcrumb m-0">
-              <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-              <li class="breadcrumb-item active">Clan Details</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript:
+                                    void(0);">Clan</a></li>
+                            <li class="breadcrumb-item active">Form</li>
+                        </ol>
+                    </div>
 
-    <%- contentFor('body') %>
-
-      <!-- Start Here Add Validation -->
-      <div class="row">
-        <div class="col-xl-12">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title mb-4">Clan Details</h4>
-
-              <form id="clanForm" data-pristine-validate>
-
-                <div class="mb-3">
-                  <label class="form-label">Clan Name (Ekika)</label>
-                  <input type="text" class="form-control" name="clanName" data-pristine-required
-                    data-pristine-maxlength="50" placeholder="Enter clan name">
                 </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Clan Totem (Ow'Akasolya)</label>
-                  <input type="text" class="form-control" name="clanTotem" data-pristine-required
-                    data-pristine-maxlength="50" placeholder="Enter clan totem">
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Clan Seat (Obutaka)</label>
-                  <input type="text" class="form-control" name="clanSeat" data-pristine-required
-                    data-pristine-maxlength="50" placeholder="Enter clan seat">
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Clan Motto (Emibala)</label>
-                  <input type="text" class="form-control" name="clanMotto" data-pristine-required
-                    data-pristine-maxlength="100" placeholder="Enter clan motto">
-                </div>
-                
-                <div class="row">
-                  <div class="col-md-6">
-            
-                    <h2>Clan Head</h2>
-            
-                    <div class="form-group">
-                      <label>Name:</label>
-                      <input type="text" class="form-control" name="people[0].name">
-                    </div>
-            
-                    <div class="form-group">
-                      <label>Gender:</label>
-                      <select class="form-control" name="people[0].gender">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </select>
-                    </div>
-            
-                    <div class="form-group">
-                      <label>Birth Date:</label>
-                      <input type="date" class="form-control" name="people[0].birthDate"> 
-                    </div>
-            
-                    <div class="form-group">
-                      <label>Birth Place:</label>
-                      <input type="text" class="form-control" name="people[0].birthPlace">
-                    </div>
-            
-                    <div class="form-group">
-                      <label>Death Date:</label>
-                      <input type="date" class="form-control" name="people[0].deathDate">
-                    </div>
-            
-                    <div class="form-group">
-                      <label>Death Place:</label>
-                      <input type="text" class="form-control" name="people[0].deathPlace">
-                    </div>
-            
-                    <div class="form-group">
-                      <label>Spouse:</label>
-                      <input type="text" class="form-control" name="people[0].spouse"> 
-                    </div>
-            
-                  </div>
-            
-                  <div class="col-md-6">
-            
-                    <h2>Parents</h2>
-            
-                    <% for(let i=0; i<2; i++) { %>
-            
-                      <h3>Parent <%= i+1 %></h3>
-            
-                      <div class="form-group">
-                        <label>Name:</label>
-                        <input type="text" class="form-control" name="people[0].parents.<%= i %>.name">
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Gender:</label>
-                        <select class="form-control" name="people[0].parents.<%= i %>.gender">
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                        </select>
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Birth Date:</label>
-                        <input type="date" class="form-control" name="people[0].parents.<%= i %>.birthDate">
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Birth Place:</label>
-                        <input type="text" class="form-control" name="people[0].parents.<%= i %>.birthPlace">
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Death Date:</label>
-                        <input type="date" class="form-control" name="people[0].parents.<%= i %>.deathDate">
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Death Place:</label>
-                        <input type="text" class="form-control" name="people[0].parents.<%= i %>.deathPlace">
-                      </div>
-            
-                    <% } %>
-            
-                  </div>
-                </div>
-            
-                <div class="row">
-                  <div class="col-md-12">
-            
-                    <h2>Grandparents</h2>
-            
-                    <% for(let i=0; i<4; i++) { %>
-            
-                      <h3>Grandparent <%= i+1 %></h3>
-            
-                      <div class="form-group">
-                        <label>Name:</label>
-                        <input type="text" class="form-control" name="people[0].grandparents.<%= i %>.grandparent.name">
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Gender:</label>
-                        <select class="form-control" name="people[0].grandparents.<%= i %>.grandparent.gender">
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                        </select>
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Birth Date:</label>
-                        <input type="date" class="form-control" name="people[0].grandparents.<%= i %>.grandparent.birthDate">
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Birth Place:</label>
-                        <input type="text" class="form-control" name="people[0].grandparents.<%= i %>.grandparent.birthPlace">
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Death Date:</label>
-                        <input type="date" class="form-control" name="people[0].grandparents.<%= i %>.grandparent.deathDate">
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Death Place:</label>
-                        <input type="text" class="form-control" name="people[0].grandparents.<%= i %>.grandparent.deathPlace">
-                      </div>
-            
-                      <div class="form-group">
-                        <label>Side:</label>
-                        <select class="form-control" name="people[0].grandparents.<%= i %>.side">
-                          <option value="maternal">Maternal</option>
-                          <option value="paternal">Paternal</option>
-                        </select>
-                      </div>
-            
-                    <% } %>
-            
-                  </div>
-                </div>
-            
-                <% let generationCount = 3 %>
-            
-                <% for(let i=generationCount; i<10; i++) { %>
-            
-                  <div class="row">
-                    <div class="col-md-12">
-                    
-                      <h2>Generation <%= i %></h2>
-            
-                      <% for(let j=0; j<Math.pow(2,i); j++) { %>
-            
-                        <div class="form-group">
-                          <label>Name:</label>
-                          <input type="text" class="form-control" name="people[0].generation<%= i %>.<%= j %>.name">
-                        </div>
-            
-                        <div class="form-group">
-                          <label>Gender:</label>
-                          <select class="form-control" name="people[0].generation<%= i %>.<%= j %>.gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                          </select>
-                        </div>
-            
-                        <div class="form-group">
-                          <label>Birth Date:</label>
-                          <input type="date" class="form-control" name="people[0].generation<%= i %>.<%= j %>.birthDate">
-                        </div>
-            
-                        <div class="form-group">
-                          <label>Birth Place:</label>
-                          <input type="text" class="form-control" name="people[0].generation<%= i %>.<%= j %>.birthPlace">
-                        </div>
-            
-                        <div class="form-group">
-                          <label>Death Date:</label>
-                          <input type="date" class="form-control" name="people[0].generation<%= i %>.<%= j %>.deathDate">
-                        </div>
-            
-                        <div class="form-group">
-                          <label>Death Place:</label>
-                          <input type="text" class="form-control" name="people[0].generation<%= i %>.<%= j %>.deathPlace">
-                        </div>
-            
-                      <% } %>
-            
-                    </div>
-                  </div>
-            
-                <% } %>
-            
-                <div class="row">
-                  <div class="col-md-12">
-                    <button type="button" class="btn btn-secondary" onclick="addGeneration()">
-                      Add Generation
-                    </button>
-                    <button type="button" class="btn btn-secondary" onclick="removeGeneration()">
-                      Remove Generation
-                    </button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </div>
-                </div>
-
-                <!-- Submit -->
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-
             </div>
-          </div>
         </div>
-      </div>
-      <!-- End Here Add Validation -->
+        <!-- end page title -->
 
-      <%- contentFor('FooterJs') %>
+        <%- contentFor('body') %>
 
-        <!-- Add PristineJS -->
-        <script src="https://cdn.jsdelivr.net/npm/pristinejs@1.0.0/dist/pristine.min.js"></script>
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4 class="card-title">Clan Info</h4>
+                  </div>
+                  
+                  <div class="card-body">
+              
+                    <form id="clanForm" class="needs-validation" novalidate>
+              
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="clanName">Clan Name</label>
+                            <input type="text" class="form-control" id="clanName" name="clanName" required>
+                            <div class="invalid-feedback">
+                              Please provide a clan name.
+                            </div>  
+                          </div>
+                        </div>
+              
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="clanMotto">Clan Motto</label>
+                            <input type="text" class="form-control" id="clanMotto" name="clanMotto" required>
+                            <div class="invalid-feedback">
+                              Please provide a clan motto.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+              
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="clanEmail">Clan Email</label>
+                            <input type="email" class="form-control" id="clanEmail" name="clanEmail" required>
+                            <div class="invalid-feedback">
+                              Please provide a valid email.
+                            </div>
+                          </div>
+                        </div>
+              
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="clanDescription">Clan Description</label>    
+                            <textarea class="form-control" id="clanDescription" name="clanDescription" rows="3" required></textarea>
+                            <div class="invalid-feedback">
+                              Please provide a clan description.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+              
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="mb-3">
+                            <label class="form-label" for="bio">Bio</label>
+                            <textarea class="form-control" id="bio" name="bio" rows="5" required></textarea>
+                            <div class="invalid-feedback">
+                              Please provide a bio.
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+              
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="mb-3">
+                            <label class="form-label">Leadership Hierarchy</label>
+                            <div id="leaders"></div> 
+                            <button type="button" id="addLeader" class="btn btn-primary">Add Leader</button>
+                          </div>
+                        </div>
+                      </div>
+              
+                      <button class="btn btn-primary" type="submit">Submit Form</button>
+              
+                    </form>
+              
+                  </div>
+                </div>
+              </div>
+              
+              <script>
+              // Add leader entry  
+              document.getElementById('addLeader').addEventListener('click', function() {
+                var leaders = document.getElementById('leaders');
+                var leaderIndex = leaders.childElementCount + 1;
+                
+                var row = document.createElement('div');
+                row.className = 'row';
+              
+                var nameColumn = document.createElement('div');
+                nameColumn.className = 'col-md-6';
+              
+                var nameGroup = document.createElement('div');
+                nameGroup.className = 'mb-3';
+              
+                var nameLabel = document.createElement('label');
+                nameLabel.setAttribute('for', 'leaderName'+leaderIndex);
+                nameLabel.className = 'form-label';
+                nameLabel.textContent = 'Leader Name';
+              
+                var nameInput = document.createElement('input');
+                nameInput.type = 'text';
+                nameInput.className = 'form-control';
+                nameInput.id = 'leaderName'+leaderIndex;
+                nameInput.name = 'leadershipHierarchy['+ (leaderIndex-1) +'][leaderName]';
+                nameInput.required = true;
+              
+                nameGroup.appendChild(nameLabel);
+                nameGroup.appendChild(nameInput);
+                nameColumn.appendChild(nameGroup);
+              
+                var titleColumn = document.createElement('div');
+                titleColumn.className = 'col-md-6';
+              
+                var titleGroup = document.createElement('div');  
+                titleGroup.className = 'mb-3';
+              
+                var titleLabel = document.createElement('label');  
+                titleLabel.setAttribute('for', 'leaderTitle'+leaderIndex);
+                titleLabel.className = 'form-label'; 
+                titleLabel.textContent = 'Leader Title';
+              
+                var titleInput = document.createElement('input');
+                titleInput.type = 'text';
+                titleInput.className = 'form-control';
+                titleInput.id = 'leaderTitle'+leaderIndex; 
+                titleInput.name = 'leadershipHierarchy['+ (leaderIndex-1) +'][title]';
+              
+                titleGroup.appendChild(titleLabel);
+                titleGroup.appendChild(titleInput);
+                titleColumn.appendChild(titleGroup);
+              
+                row.appendChild(nameColumn);
+                row.appendChild(titleColumn);
+              
+                leaders.appendChild(row);
+              
+              });
+              </script>
 
-        <script>
-         
-        </script>
+        <!-- Second Form -->
+                <div class="col-xl-6">
+                    <div class="card">
+                      <div class="card-header">
+  
+                        <h4 class="card-title">Family Tree Form</h4>
+                        
+                        <p class="card-title-desc">
+                          This form allows you to enter information about a person in your family tree.
+                          The fields correspond to the Person schema defined in the Mongoose model.
+                        </p>
+                        
+                        <p class="card-title-desc">
+                          Validation is implemented to require certain fields. The clan head checkbox
+                          dynamically shows/hides the years as clan head field.
+                        </p>
+                        
+                      </div>
+                        <div class="card-body">
+                          <form class="needs-validation" novalidate>
 
-        <%- contentFor('BottomJs') %>
+                            <div class="mb-3">
+                              <label for="name">Name</label>
+                              <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                          
+                            <div class="mb-3">
+                              <label for="dateOfBirth">Date of Birth</label> 
+                              <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+                            </div>
+                          
+                            <div class="mb-3">
+                              <label for="dateOfDeath">Date of Death</label>  
+                              <input type="date" class="form-control" id="dateOfDeath" name="dateOfDeath">
+                            </div>
+                          
+                            <div class="mb-3">
+                              <label for="gender">Gender</label>
+                              <select class="form-control" id="gender" name="gender" required>
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                              </select>
+                            </div>
+                          
+                            <div class="mb-3">
+                              <label for="placeOfBirth">Place of Birth</label>
+                              <input type="text" class="form-control" id="placeOfBirth" name="placeOfBirth" required>
+                            </div>
+                          
+                            <div class="mb-3 form-check">
+                              <input type="checkbox" class="form-check-input" id="clanHead" name="clanHead">
+                              <label class="form-check-label" for="clanHead">Clan Head</label>
+                            </div>
+                          
+                            <div class="mb-3" id="yearsAsClanHeadField" style="display: none;">
+                              <label for="yearsAsClanHead">Years as Clan Head</label>
+                              <input type="number" class="form-control" id="yearsAsClanHead" name="yearsAsClanHead">
+                            </div>
+                            
+                            <div class="mb-3">
+                              <label for="generation">Generation</label>
+                              <input type="number" class="form-control" id="generation" name="generation" required>
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="parent">Parent</label>
+                              <select class="form-control" id="parent" name="parent">
+                                <option value="">Select</option>
+                              </select>
+                            </div>
+                          
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          
+                          </form>
+                          
+                          <script>
+                          // Show/hide years as clan head field based on clan head checkbox
+                          const clanHeadCheckbox = document.getElementById('clanHead');
+                          const yearsAsClanHeadField = document.getElementById('yearsAsClanHeadField');
+                          
+                          clanHeadCheckbox.addEventListener('change', () => {
+                            if (clanHeadCheckbox.checked) {
+                              yearsAsClanHeadField.style.display = 'block';
+                            } else {
+                              yearsAsClanHeadField.style.display = 'none';
+                            } 
+                          });
+                          
+                          // Form validation
+                          const form = document.querySelector('.needs-validation');
+                          
+                          form.addEventListener('submit', (event) => {
+                          
+                            if (!form.checkValidity()) {
+                              event.preventDefault();
+                              event.stopPropagation();
+                            }
+                            
+                            form.classList.add('was-validated');
+                          });
+                          </script>
+                        </div>
+                    </div>
+                    <!-- end card -->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+
+                    <%- contentFor('FooterJs') %>
+
+                        <!-- pristine js -->
+                        <script
+                            src="public/assets/libs/pristinejs/pristine.min.js"></script>
+                        <!-- form validation -->
+                        <script
+                            src="public/assets/js/pages/form-validation.init.js"></script>
+                        <%- contentFor('BottomJs') %>

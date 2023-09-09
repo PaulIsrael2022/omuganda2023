@@ -50,7 +50,7 @@ module.exports = function (app) {
 
     app.get('/records', isAuth, authorize("clan","admin"), function (req, res) {
       res.locals = { title: 'Record' };
-      res.render('Clan Account/record',{
+      res.render('Clan Account/record_clan_information',{
             role: req.user.role // pass the user role to the layout
           }); 
     });
@@ -74,6 +74,14 @@ module.exports = function (app) {
             role: req.user.role // pass the user role to the layout
           }); 
     });
+
+    
+app.get('/clan-profile', isAuth, authorize("clan","admin"), function (req, res) {
+      res.locals = { title: 'Profile' };
+      res.render('Clan Account/clan_profile', {
+            role: req.user.role // pass the user role to the layout
+      });
+});
     
 
 // User Account
@@ -87,14 +95,18 @@ module.exports = function (app) {
 
 // Standalone
 
-app.get('/profile', isAuth, authorize('user,clan'), function (req, res) {
+app.get('/profile', isAuth, authorize("clan","admin"), function (req, res) {
       res.locals = { title: 'Profile' };
-      res.render('Contacts/profile');
+      res.render('Contacts/contacts-profile', {
+            role: req.user.role // pass the user role to the layout
+      });
 });
 
-app.get('/contacts-grid', isAuth, authorize('user,clan'), function (req, res) {
+app.get('/contacts-grid', isAuth, authorize("clan","admin"), function (req, res) {
             res.locals = { title: 'User Grid' };
-            res.render('Contacts/contacts-grid');
+            res.render('Contacts/contacts-grid',{
+                  role: req.user.role // pass the user role to the layout
+            });
 });
 
 

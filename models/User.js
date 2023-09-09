@@ -18,7 +18,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     enum: ['user', 'clan', 'admin'],
     default: 'user' 
-  }
+  },
+  // claninfo:{},
 });
 
 // Hash password before saving 

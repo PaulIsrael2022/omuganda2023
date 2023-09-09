@@ -1,0 +1,71 @@
+<%- contentFor('HeaderCss') %>
+
+<%- contentFor('breadcrumb') %>
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center
+                justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">Record Clan Info</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript:
+                                void(0);">Clan</a></li>
+                        <li class="breadcrumb-item active">Form</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <%- contentFor('body') %>
+
+<form id="clanHistoryForm" class="needs-validation" novalidate>
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" name="title" required>
+      <div class="invalid-feedback">
+        Please provide a title.
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="paragraph" class="form-label">Paragraph</label>
+      <textarea class="form-control" id="paragraph" name="paragraph" required></textarea>
+      <div class="invalid-feedback">
+        Please provide the history paragraph.
+      </div>
+    </div>
+  
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  
+  </form>
+  
+  <script>
+  // Example client-side validation
+  const form = document.getElementById('clanHistoryForm');
+  form.addEventListener('submit', e => {
+    if (!form.checkValidity()) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    form.classList.add('was-validated');
+  });  
+  </script>
+
+  
+ <%- contentFor('FooterJs') %>
+
+     <!-- pristine js -->
+     <script
+         src="public/assets/libs/pristinejs/pristine.min.js"></script>
+     <!-- form validation -->
+     <script
+         src="public/assets/js/pages/form-validation.init.js"></script>
+<%- contentFor('BottomJs') %>

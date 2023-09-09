@@ -22,3 +22,11 @@ app.get('/form', async (req, res) => {
   
     res.redirect('/success');
   });
+
+  // History CRUD
+  // Notable memebers CRUD
+  // traditions CRUD
+  // CLAN LINEAGE CRUD
+  // Media Gallery CRUD
+  // Profile CRUD
+  // Settings and Billing CRUD
