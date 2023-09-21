@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const {FamilyTree, ClanHistory, NoteworthyClanMember, Tradition, ClanProfile } = require("../models/clan_account");
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -13,13 +14,34 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  },
+  }, 
   role: {
     type: String,
     enum: ['user', 'clan', 'admin'],
     default: 'user' 
   },
-  // claninfo:{},
+claninfo: {
+  clan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ClanProfile',
+  },
+  familyTree: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'FamilyTree',
+  },
+  clanHistory: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ClanHistory',
+  },
+  noteworthyClanMember: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'NoteworthyClanMember',
+  },
+  traditions: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tradition',
+  }],
+}
 });
 
 // Hash password before saving 

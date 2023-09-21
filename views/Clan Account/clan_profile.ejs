@@ -25,7 +25,7 @@
         <%- contentFor('body') %>
 
             <div class="row">
-                <div class="col-xl-9 col-lg-8">
+                <div class="col-xl-12 col-lg-8">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -40,9 +40,10 @@
                                                     rounded-circle d-block">
                                             </div>
                                         </div>
+                                        <% if (clanProfile) { %>
                                         <div class="flex-grow-1">
                                             <div>
-                                                <h5 class="font-size-16 mb-1" id="clan_name_placeholder">Clan name Placeholder</h5>
+                                                <h5 class="font-size-16 mb-1" id="clan_name_placeholder"><%= clanProfile.clanName %></h5>
                                                 
                                                 <div class="d-flex flex-wrap
                                                     align-items-start gap-2
@@ -51,11 +52,11 @@
                                                     <div><i class="mdi
                                                             mdi-circle-medium
                                                             me-1 text-success
-                                                            align-middle"></i>Clan Motto PlaceHolder</div>
+                                                            align-middle"></i><%= clanProfile.clanName %></div>
                                                     <div><i class="mdi
                                                             mdi-circle-medium
                                                             me-1 text-success
-                                                            align-middle"></i>monkeyclan@omugandakika.com | Email PlaceHolder</div>
+                                                            align-middle"></i>Email: <%= clanProfile.email %></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,131 +141,7 @@
                                                 </div>
                                                 <div class="col-xl">
                                                     <div class="text-muted">
-                                                        <p class="mb-2">Hi I'm
-                                                            Phyllis Gatlin,
-                                                            Lorem Ipsum is
-                                                            simply dummy text of
-                                                            the printing and
-                                                            typesetting
-                                                            industry. Lorem
-                                                            Ipsum has been the
-                                                            industry's standard
-                                                            dummy text ever
-                                                            since the 1500s,
-                                                            when an unknown
-                                                            printer took a
-                                                            galley of type and
-                                                            scrambled it to make
-                                                            a type specimen
-                                                            book. It has
-                                                            survived not only
-                                                            five centuries, but
-                                                            also the leap into
-                                                            electronic
-                                                            typesetting,
-                                                            remaining
-                                                            essentially
-                                                            unchanged. It was
-                                                            popularised in the
-                                                            1960s with the
-                                                            release of Letraset
-                                                            sheets containing
-                                                            Lorem Ipsum passages</p>
-                                                        <p class="mb-0">It is a
-                                                            long established
-                                                            fact that a reader
-                                                            will be distracted
-                                                            by the readable
-                                                            content of a page
-                                                            when looking at it
-                                                            has a more-or-less
-                                                            normal distribution
-                                                            of letters</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="py-3">
-                                            <div class="row">
-                                                <div class="col-xl-2">
-                                                    <div>
-                                                        <h5
-                                                            class="font-size-15">Clan description
-                                                            :</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl">
-                                                    <div class="text-muted">
-                                                        <p>If several languages
-                                                            coalesce, the
-                                                            grammar of the
-                                                            resulting language
-                                                            is more simple and
-                                                            regular than that of
-                                                            the individual
-                                                            languages. The new
-                                                            common language will
-                                                            be more simple and
-                                                            regular than the
-                                                            existing European
-                                                            languages. It will
-                                                            be as simple as
-                                                            Occidental; in fact,
-                                                            it will be
-                                                            Occidental. To an
-                                                            English person, it
-                                                            will seem like
-                                                            simplified English,
-                                                            as a skeptical
-                                                            Cambridge friend of
-                                                            mine told me what
-                                                            Occidental is. The
-                                                            European languages
-                                                            are members of the
-                                                            same family. Their
-                                                            separate existence
-                                                            is a myth. For
-                                                            science, music,
-                                                            sport, etc</p>
-
-                                                        <ul class="list-unstyled
-                                                            mb-0">
-                                                            <li class="py-1"><i
-                                                                    class="mdi
-                                                                    mdi-circle-medium
-                                                                    me-1
-                                                                    text-success
-                                                                    align-middle"></i>Donec
-                                                                vitae sapien ut
-                                                                libero venenatis
-                                                                faucibus</li>
-                                                            <li class="py-1"><i
-                                                                    class="mdi
-                                                                    mdi-circle-medium
-                                                                    me-1
-                                                                    text-success
-                                                                    align-middle"></i>Quisque
-                                                                rutrum aenean
-                                                                imperdiet</li>
-                                                            <li class="py-1"><i
-                                                                    class="mdi
-                                                                    mdi-circle-medium
-                                                                    me-1
-                                                                    text-success
-                                                                    align-middle"></i>Integer
-                                                                ante a
-                                                                consectetuer
-                                                                eget</li>
-                                                            <li class="py-1"><i
-                                                                    class="mdi
-                                                                    mdi-circle-medium
-                                                                    me-1
-                                                                    text-success
-                                                                    align-middle"></i>Phasellus
-                                                                nec sem in justo
-                                                                pellentesque</li>
-                                                        </ul>
+                                                        <p class="mb-2"><%= clanProfile.clanDescription %></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -274,7 +151,9 @@
                                 <!-- end card body -->
                             </div>
                             <!-- end card -->
-
+                            <% } else { %>
+                                <p>You have not created a clan profile yet.</p>
+                              <% } %>
                         
                         </div>
                         <!-- end tab pane -->
@@ -824,124 +703,6 @@
                     <!-- end tab content -->
                 </div>
                 <!-- end col -->
-
-                <div class="col-xl-3 col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-3">Skills</h5>
-
-                            <div class="d-flex flex-wrap gap-2 font-size-16">
-                                <a href="#" class="badge badge-soft-primary">Photoshop</a>
-                                <a href="#" class="badge badge-soft-primary">illustrator</a>
-                                <a href="#" class="badge badge-soft-primary">HTML</a>
-                                <a href="#" class="badge badge-soft-primary">CSS</a>
-                                <a href="#" class="badge badge-soft-primary">Javascript</a>
-                                <a href="#" class="badge badge-soft-primary">Php</a>
-                                <a href="#" class="badge badge-soft-primary">Python</a>
-                            </div>
-                        </div>
-                        <!-- end card body -->
-                    </div>
-                    <!-- end card -->
-
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-3">Portfolio</h5>
-
-                            <div>
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#" class="py-2 d-block
-                                            text-muted"><i class="mdi mdi-web
-                                                text-primary me-1"></i> Website</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="py-2 d-block
-                                            text-muted"><i class="mdi
-                                                mdi-note-text-outline
-                                                text-primary me-1"></i> Blog</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end card body -->
-                    </div>
-                    <!-- end card -->
-
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-3">Similar Profiles</h5>
-                            <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item
-                                    list-group-item-action">
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar-sm flex-shrink-0
-                                            me-3">
-                                            <img
-                                                src="public/assets/images/users/avatar-1.jpg"
-                                                alt="" class="img-thumbnail
-                                                rounded-circle">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <div>
-                                                <h5 class="font-size-14 mb-1">James
-                                                    Nix</h5>
-                                                <p class="font-size-13
-                                                    text-muted mb-0">Full Stack
-                                                    Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item
-                                    list-group-item-action">
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar-sm flex-shrink-0
-                                            me-3">
-                                            <img
-                                                src="public/assets/images/users/avatar-3.jpg"
-                                                alt="" class="img-thumbnail
-                                                rounded-circle">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <div>
-                                                <h5 class="font-size-14 mb-1">Darlene
-                                                    Smith</h5>
-                                                <p class="font-size-13
-                                                    text-muted mb-0">UI/UX
-                                                    Designer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item
-                                    list-group-item-action">
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar-sm flex-shrink-0
-                                            me-3">
-                                            <div class="avatar-title
-                                                bg-soft-light text-light
-                                                rounded-circle font-size-22">
-                                                <i class="bx bxs-user-circle"></i>
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <div>
-                                                <h5 class="font-size-14 mb-1">William
-                                                    Swift</h5>
-                                                <p class="font-size-13
-                                                    text-muted mb-0">Backend
-                                                    Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- end card body -->
-                    </div>
-                    <!-- end card -->
-                </div>
                 <!-- end col -->
             </div>
             <!-- end row -->

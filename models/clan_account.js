@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
-const User = require('./user');
+const User = require('../models/User');
 const Schema = mongoose.Schema;
 
-// Define Clan Head Fmily Tree schema
-const mongoose = require('mongoose');
 
 const PersonSchema = new mongoose.Schema({
+    user: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User' 
+  },
   name: String,
   dateOfBirth: Date,
   dateOfDeath: {
@@ -19,7 +21,7 @@ const PersonSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  yearsAsClanHead: string,
+  yearsAsClanHead: String,
   
   parent: {
     type: mongoose.Schema.Types.ObjectId,
@@ -36,6 +38,10 @@ const FamilyTree = mongoose.model('FamilyTree', PersonSchema);
 //History
 // Define a Mongoose schema for clan history
 const clanHistorySchema = new mongoose.Schema({
+    user: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User' 
+  },
   title: {
     type: String,
     required: true,
@@ -52,6 +58,10 @@ const ClanHistory = mongoose.model('ClanHistory', clanHistorySchema);
 // notable memebers
 // Define a Mongoose schema for noteworthy clan members
 const noteworthyMemberSchema = new mongoose.Schema({
+    user: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User' 
+  },
   name: {
     type: String,
     required: true,
@@ -75,6 +85,10 @@ const NoteworthyClanMember = mongoose.model('NoteworthyClanMember', noteworthyMe
 // traditions
 // Define a Mongoose schema for traditions
 const traditionSchema = new mongoose.Schema({
+    user: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User' 
+  },
   traditionName: {
     type: String,
     required: true,
@@ -103,9 +117,13 @@ const Tradition = mongoose.model('Tradition', traditionSchema);
 
 // Members List
 
-// Profile
+// Profile 
 // Define a Mongoose schema
 const clanProfileSchema = new mongoose.Schema({
+    user: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User' 
+  },
   clanName: {
     type: String,
     required: true,
@@ -126,17 +144,17 @@ const clanProfileSchema = new mongoose.Schema({
   clanDescription: {
     type: String,
   },
-  leadershipHierarchy: [
-    {
-      leaderName: {
-        type: String,
-        required: true,
-      },
-      title: {
-        type: String,
-      },
-    },
-  ],
+  // leadershipHierarchy: [
+  //   {
+  //     leaderName: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //     title: {
+  //       type: String,
+  //     },
+  //   },
+  // ],
 });
 
 
@@ -145,7 +163,6 @@ const ClanProfile = mongoose.model('Clan', clanProfileSchema);
 // Settings and Billing
 
 module.exports = {
-  ClanMember: mongoose.model('ClanMember', clanMemberSchema),
   FamilyTree: mongoose.model('FamilyTree', PersonSchema),
   ClanHistory: mongoose.model('ClanHistory', clanHistorySchema),
   NoteworthyClanMember: mongoose.model('NoteworthyClanMember', noteworthyMemberSchema),

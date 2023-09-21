@@ -4,13 +4,13 @@ const bcrypt = require("bcrypt");
 const { check, validationResult } = require("express-validator");
 
 exports.registerUser = async (req, res) => {
-  console.log(
-    JSON.stringify({
-      method: req.method, 
-      path: req.path
-    }),
-    JSON.stringify(req.body)
-  );
+  // console.log(
+  //   JSON.stringify({
+  //     method: req.method, 
+  //     path: req.path
+  //   }),
+  //   JSON.stringify(req.body)
+  // );
   // Validate the user input
   await check("username", "Username is required").notEmpty().run(req);
   await check("password", "Password is required").notEmpty().run(req);
@@ -35,13 +35,25 @@ exports.registerUser = async (req, res) => {
     }
   }
 
-  // Create a new user
-  try {
-    const user = await User.create({ email, username, password, role });
-    return res.status(201).json({ message: "User registered successfully" });
-  } catch (error) {
-    console.log(error)
-    return res.status(500).json({ message: "Something went wrong" });
-  }
+// Create a new user
+try {
+  const user = await User.create({ email, username, password, role });
+
+  req.login(user, (loginErr) => {
+    if (loginErr) {
+      return res.status(500).json({ message: "User registered, but login failed" });
+    }
+    if (role === "clan") {
+      // Redirect to a page to collect additional clan profile data
+      return res.redirect("/clan/record");
+    } else {
+      // Redirect to a page to collect additional user profile data
+      return res.redirect("/user/record");
+    }
+  });
+} catch (error) {
+  console.log(error);
+  return res.status(500).json({ message: "Something went wrong" });
+}
 };
 

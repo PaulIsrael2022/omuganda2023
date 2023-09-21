@@ -3,6 +3,9 @@ var bodyParser = require('body-parser');
 var urlencodeParser = bodyParser.urlencoded({ extended: false });
 var validator = require('express-validator');
 const { isAuth, authorize} = require('../middleware/middlewares.js'); 
+const clanController = require('../controllers/clanAccount');
+const {FamilyTree, ClanHistory, NoteworthyClanMember, Tradition, ClanProfile } = require("../models/clan_account");
+
 
 
 module.exports = function (app) {
@@ -34,6 +37,8 @@ module.exports = function (app) {
           });  
     });
 
+    app.post('/clan/bio', clanController.saveClanProfile);
+
     app.get('/clan-info', isAuth, authorize("clan","admin"), function (req, res) {
       res.locals = { title: 'Record Clan History' };
       res.render('Clan Account/record_clan_information',{
@@ -48,7 +53,7 @@ module.exports = function (app) {
           }); 
     });
 
-    app.get('/records', isAuth, authorize("clan","admin"), function (req, res) {
+    app.get('/clan/record', isAuth, authorize("clan","admin"), function (req, res) {
       res.locals = { title: 'Record' };
       res.render('Clan Account/record_clan_information',{
             role: req.user.role // pass the user role to the layout
@@ -76,10 +81,14 @@ module.exports = function (app) {
     });
 
     
-app.get('/clan-profile', isAuth, authorize("clan","admin"), function (req, res) {
+app.get('/clan-profile', isAuth, authorize("clan","admin"), async function (req, res) {
       res.locals = { title: 'Profile' };
+       // Get the clan profile associated with the current user
+      const clanProfile = await ClanProfile.findOne({ user: req.user.id });
+      console.log(clanProfile)
       res.render('Clan Account/clan_profile', {
-            role: req.user.role // pass the user role to the layout
+            role: req.user.role, // pass the user role to the layout
+            clanProfile
       });
 });
     

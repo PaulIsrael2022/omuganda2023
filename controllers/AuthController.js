@@ -11,23 +11,6 @@ var validator = require("express-validator");
 var axios = require("axios");
 var MockAdapter = require("axios-mock-adapter");
 
-// // This sets the mock adapter on the default instance
-// var mock = new MockAdapter(axios);
-
-// let users = [
-//   {
-//     id: 1,
-//     username: "admin",
-//     password: "123456",
-//     email: "admin@omuganda.ug",
-//   },
-// ];
-
-// // Mock GET request to /users when param `searchText` is 'John'
-// mock.onGet("/users", { params: { searchText: "John" } }).reply(200, {
-//   users: users,
-// });
-
 module.exports = function (app) {
   // Inner Auth
   app.get("/pages-login", function (req, res) {
@@ -89,25 +72,6 @@ module.exports = function (app) {
     }
   });
 
-// Register Code Beginning (Old)
-
-  // app.post("/post-register", urlencodeParser, function (req, res) {
-  //   let tempUser = {
-  //     username: req.body.username,
-  //     email: req.body.email,
-  //     password: req.body.password,
-  //   };
-  //   users.push(tempUser);
-
-  //   // Assign value in session
-  //   sess = req.session;
-  //   sess.user = tempUser;
-
-  //   res.redirect("/");
-  // });
-
-// Register End
-
   
   app.get("/login", function (req, res) {
     res.render("Auth/auth-login", {
@@ -116,24 +80,6 @@ module.exports = function (app) {
     });
   });
 
-  // Old Login Auth Code
-  // app.post("/post-login", urlencodeParser, function (req, res) {
-  //   const validUser = users.filter(
-  //     (usr) =>
-  //       usr.email === req.body.email && usr.password === req.body.password
-  //   );
-  //   if (validUser["length"] === 1) {
-  //     // Assign value in session
-  //     sess = req.session;
-  //     sess.user = validUser;
-
-  //     res.redirect("/");
-  //   } else {
-  //     req.flash("error", "Incorrect email or password!");
-  //     res.redirect("/login");
-  //   }
-  // });
-
   app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login', 
   failureFlash: true }),
@@ -141,7 +87,7 @@ module.exports = function (app) {
     //check the user's role
     if (req.user.role === 'admin' || req.user.role === 'clan') {
       //redirect to clan dashboard
-      res.redirect('/clan-dashboard');
+      res.redirect('/clan-profile');
     } else if (req.user.role === 'user') {
       //redirect to user dashboard
       res.redirect('/user-dashboard');
@@ -151,29 +97,6 @@ module.exports = function (app) {
     }
   }
 );
-
-
-  app.get('/logout', async (req, res) => {
-
-    try {
-  
-      await req.logout(function(err) {
-        // handle err
-      });
-  
-      req.session.destroy();
-  
-      res.redirect('/login');
-  
-    } catch(error) {
-      console.log("logout :",error)
-      // handle error
-  
-    }
-  
-  });
-
-
 
   app.get("/forgot-password", function (req, res) {
     res.render("Auth/auth-forgot-password", {
@@ -192,12 +115,4 @@ module.exports = function (app) {
       res.redirect("/forgot-password");
     }
   });
-
-  // app.get("/logout", function (req, res) {
-  //   // Assign  null value in session
-  //   sess = req.session;
-  //   sess.user = null;
-
-  //   res.redirect("/login");
-  // });
 };

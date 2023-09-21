@@ -6,7 +6,8 @@ var validator = require("express-validator");
 let db = require("./config/dbconnect");
 var AuthController = require("./controllers/AuthController");
 const authRoute = require("./routers/authRoute");
-var session = require("express-session");
+const clanRoute = require("./routers/ClanRoutes");
+var session = require("express-session"); 
 let passport = require('./config/passport.js');
 const flash = require('connect-flash');
 // var bodyParser = require("body-parser");
@@ -16,7 +17,6 @@ var pageRouter = require("./routers/route");
 
 // Add urlencoded parsing middleware
 app.use(express.urlencoded({ extended: false }));
-app.use(flash());
 
 app.use(
   session({
@@ -24,7 +24,7 @@ app.use(
     secret: "somerandonstuffs",
     resave: false,
     saveUninitialized: false,
-    cookie: {
+    cookie: { 
       expires: 1200000,
     },
   })
@@ -33,8 +33,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-  
-app.use(flash());
+app.use(
+  flash()
+);
+
 app.use(
   i18n({
     translationsPath: path.join(__dirname, "i18n"), // <--- use here. Specify translations files path.
